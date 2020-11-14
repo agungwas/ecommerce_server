@@ -53,6 +53,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: "Image is required"
+        },
+        isUrl: {
+          args: true,
+          msg: "Image url must be valid url"
         }
       }
     },
@@ -69,8 +73,12 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Price is required"
         },
         min: {
-          args: 1,
+          args: [1],
           msg: "Price cannot below 1"
+        },
+        isInt: {
+          args: true,
+          msg: "Price must be number"
         }
       }
     },
@@ -87,8 +95,12 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Stock is required"
         },
         min: {
-          args: 1,
-          msg: "Stock cannot below 1"
+          args: [0],
+          msg: "Stock cannot below 0"
+        },
+        isInt: {
+          args: true,
+          msg: "Stock must be number"
         }
       }
     },

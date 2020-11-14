@@ -12,9 +12,9 @@ module.exports = class ProductController {
   }
   
   static add(req, res, next) {
-    const { name, image_url, stock, price } = req.body
+    const { name, image_url, stock, price, category } = req.body
     const { UserId } = req.user
-    Product.create({ name, image_url, stock, price, UserId })
+    Product.create({ name, image_url, stock, price, category, UserId })
       .then(data => {
         res.status(201).json({ msg: `Success add ${name}`})
       })
