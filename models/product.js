@@ -28,6 +28,20 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: "Category is required"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Category is required"
+        }
+      }
+    },
     image_url: {
       type: DataTypes.STRING,
       allowNull: false,

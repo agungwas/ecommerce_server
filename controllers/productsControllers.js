@@ -36,8 +36,8 @@ module.exports = class ProductController {
 
   static edit(req, res, next) {
     const { UserId, id } = req.product
-    const { name, image_url, stock, price } = req.body
-    Product.update({ name, image_url, stock, price }, { where: { UserId, id }})
+    const { name, image_url, stock, price, category } = req.body
+    Product.update({ name, image_url, stock, price, category }, { where: { UserId, id }})
       .then(data => {
         res.status(201).json({ msg: `Product '${req.product.name}' updated successfully`})
       })

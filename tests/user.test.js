@@ -54,7 +54,7 @@ beforeAll(async (done) => {
     done()
   } catch (error) {
     console.log(error, "dari Before All");
-    done()
+    done(error)
   }
 })
 
@@ -67,7 +67,7 @@ afterAll(async (done) => {
     done()
   } catch (error) {
     console.log(error, "dari After All");
-    done()
+    done(error)
   }
 })
 
@@ -181,10 +181,12 @@ describe('Product test', () => {
       .send(product.failed)
       .then(({ status, body }) => {
         expect(status).toEqual(400)
-        expect(body).toHaveProperty('msg', expect.arrayContaining([expect.any(String)]))
+        
+        expect(body).toHaveProperty('msg', expect.arrayContaining(['name is required']))
         done()
       })
   })
+  test
 
   test("Add product failed case: user is not admin", (done) => {
     const token = JWT.create(user[1])
@@ -205,6 +207,7 @@ describe('Product test', () => {
       .delete('/products/' + dbProduct[0].id)
       .set('access_token', access_token)
       .then(({ status, body }) => {
+        // delete status 200
         expect(status).toEqual(201)
         expect(body).toHaveProperty("msg", `Product '${dbProduct[0].name}' deleted successfully`)
         done()
@@ -230,6 +233,7 @@ describe('Product test', () => {
       .set("access_token", access_token)
       .send(product.success)
       .then(( { status, body } ) => {
+        // update 200
         expect(body).toHaveProperty("msg", `Product '${dbProduct[1].name}' updated successfully`)
         expect(status).toEqual(201)
         done()
@@ -248,3 +252,5 @@ describe('Product test', () => {
       })
   });
 })
+
+// kurang get yang gak ada access_token
