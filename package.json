@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --runInBand --detectOpenHandles --forceExit --verbose --watch",
-    "dev": "nodemon bin/www.js"
+    "dev": "nodemon bin/www.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
