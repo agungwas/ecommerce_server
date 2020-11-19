@@ -3,6 +3,7 @@ const Bcrypt = require('../helpers/bcrypt')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    console.log(Bcrypt.create('1234'));
     await queryInterface.bulkInsert('Users', [{
         email: 'admin@mail.com',
         password: Bcrypt.create('1234'),

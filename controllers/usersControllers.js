@@ -18,6 +18,17 @@ module.exports = class UserController {
       }
     } catch (error) {
       next(error)
-    } 
+    }
+  }
+
+  static async register (req, res, next) {
+    try {
+      const { email, password } = req.body
+      const user = await User.create({ email, password })
+      const access_token = JWT.create({ email: user.email, id: user.id, role: user.role })
+      res.status(201).json({ access_token })
+    } catch (err) {
+      next(err)
+    }
   }
 }

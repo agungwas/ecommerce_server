@@ -3,9 +3,9 @@ const ProductController = require('../controllers/productsControllers')
 const authentication = require('../middlewares/authentication')
 const author = require('../middlewares/author')
 
-router.use(authentication)
-
 router.get("/", ProductController.view)
+
+router.use(authentication)
 
 router.post('/', ProductController.add)
 

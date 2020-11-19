@@ -2,9 +2,8 @@
 const {
   Model
 } = require('sequelize');
-const JWT = require('../helpers/jwt')
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Transaction extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,24 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.belongsToMany(models.Product, { through: models.Transaction })
+      Transaction.belongsTo(models.Product)
     }
   };
-  User.init({
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING
+  Transaction.init({
+    UserId: DataTypes.INTEGER,
+    ProductId: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER,
+    confirmed: DataTypes.BOOLEAN
   }, {
     sequelize,
     hooks: {
       beforeCreate (data, opt) {
-        if (data.role !== 'admin') {
-          data.role = "customer"
-        }
-        data.password = JWT.create(data.password)
+        data.confirmed = false
       }
     },
-    modelName: 'User',
+    modelName: 'Transaction',
   });
-  return User;
+  return Transaction;
 };

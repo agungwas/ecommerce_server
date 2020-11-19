@@ -6,6 +6,10 @@ module.exports = (err, req, res, next) => {
     })
     err = {msg: err, status: 400}
   }
+  if(err.name === "SequelizeUniqueConstraintError") {
+    err = 'User already registered'
+    err = {msg: err, status: 400}
+  }
   if(err.msg) {
     const { msg, status } = err
     if(typeof(msg) === "object") {
